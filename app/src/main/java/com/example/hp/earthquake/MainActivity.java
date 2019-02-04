@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static  String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query";
     earthquakeadapter mAdapter;
+   TextView mEmptyStateTextView;
 
     @NonNull
     @Override
@@ -72,6 +73,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(@NonNull Loader<List<earthquake>> loader, List<earthquake> data) {
         // Clear the adapter of previous earthquake data
         Log.i(LOG_TAG,"onloadfinished");
+        View loadingIndicator = findViewById(R.id.loading_indicator);
+        loadingIndicator.setVisibility(View.GONE);
+
+        // Set empty state text to display "No earthquakes found.
+        mEmptyStateTextView.setText("no earthquakes found");
+
         final ArrayList<earthquake> data2 = (ArrayList<earthquake>)data;
          mAdapter = new earthquakeadapter(MainActivity.this,data2);
 
@@ -112,6 +119,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
+        ListView listView = (ListView)findViewById(R.id.list);
+        listView.setEmptyView(mEmptyStateTextView);
+
+
+
 
         getSupportLoaderManager().initLoader(1,null,this).forceLoad();
     }
