@@ -1,17 +1,24 @@
 package com.example.hp.earthquake;
-
-
-
-import android.app.Activity;
-import android.graphics.drawable.GradientDrawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+
+
+import static java.security.AccessController.getContext;
+
+
+
+
+        import android.app.Activity;
+        import android.graphics.drawable.GradientDrawable;
+        import android.support.annotation.NonNull;
+        import android.support.annotation.Nullable;
+        import android.support.v4.content.ContextCompat;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ArrayAdapter;
+        import android.widget.TextView;
+
+import com.example.hp.earthquake.earthquake;
 
 import java.util.ArrayList;
 
@@ -91,4 +98,3 @@ public class earthquakeadapter extends ArrayAdapter<earthquake> {
         return ContextCompat.getColor(getContext(), magnitudeColorResourceId);
     }
 }
-

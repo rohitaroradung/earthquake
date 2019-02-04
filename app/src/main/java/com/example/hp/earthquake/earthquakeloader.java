@@ -18,15 +18,17 @@ public class earthquakeloader extends AsyncTaskLoader<List<earthquake>> {
     @Nullable
     @Override
     public List<earthquake> loadInBackground() {
-        ArrayList<earthquake> earthquakes;
+
+        List<earthquake> result = null;
         try {
-            earthquakes = QueryUtils.extractEarthquakes(url);
+            result = QueryUtils.extractEarthquakes(url);
+
         }
-        catch (Exception e)
+        catch(Exception e)
         {
-            return null;
+
         }
-        return earthquakes;
+        return result;
     }
 
     /*@Override
