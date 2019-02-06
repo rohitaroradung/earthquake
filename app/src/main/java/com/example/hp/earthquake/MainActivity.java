@@ -119,14 +119,27 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
         ListView listView = (ListView)findViewById(R.id.list);
         listView.setEmptyView(mEmptyStateTextView);
 
 
 
-
-        getSupportLoaderManager().initLoader(1,null,this).forceLoad();
+       if(isConnected) {
+           getSupportLoaderManager().initLoader(1, null, this).forceLoad();
+       }
+       else
+       {
+           mEmptyStateTextView.setText("no Internet connection");
+           View loadingIndicator = findViewById(R.id.loading_indicator);
+           loadingIndicator.setVisibility(View.GONE);
+       }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
